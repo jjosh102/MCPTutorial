@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCPTutorial", "MCPTutorial.csproj", "{94FB3E2F-9B07-4A0E-9226-FB8003573654}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{676AC3B7-9DD7-4732-85FD-0936CB48B39C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{694FAF36-C9DD-4734-87A6-10F8F8D9CCD2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,9 +10,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{94FB3E2F-9B07-4A0E-9226-FB8003573654}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{94FB3E2F-9B07-4A0E-9226-FB8003573654}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{94FB3E2F-9B07-4A0E-9226-FB8003573654}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{94FB3E2F-9B07-4A0E-9226-FB8003573654}.Release|Any CPU.Build.0 = Release|Any CPU
+		{676AC3B7-9DD7-4732-85FD-0936CB48B39C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{676AC3B7-9DD7-4732-85FD-0936CB48B39C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{676AC3B7-9DD7-4732-85FD-0936CB48B39C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{676AC3B7-9DD7-4732-85FD-0936CB48B39C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{694FAF36-C9DD-4734-87A6-10F8F8D9CCD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{694FAF36-C9DD-4734-87A6-10F8F8D9CCD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{694FAF36-C9DD-4734-87A6-10F8F8D9CCD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{694FAF36-C9DD-4734-87A6-10F8F8D9CCD2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
