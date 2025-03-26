@@ -2,25 +2,23 @@
 using ModelContextProtocol.Configuration;
 using ModelContextProtocol.Protocol.Transport;
 
-var serverConfig = new McpServerConfig
+McpClientOptions mcpClientOptions = new()
+    { ClientInfo = new() { Name = "TestClient", Version = "1.0.0" } };
+
+
+McpServerConfig mcpServerConfig = new()
 {
-    Id = "test-server",
-    Name = "Test Server",
-    TransportType = TransportTypes.StdIo,
-    Location = "/path/to/server",
-    TransportOptions = new Dictionary<string, string>
-    {
-        ["arguments"] = "--test arg",
-        ["workingDirectory"] = "/working/dir"
-    }
-};
-McpClientOptions _defaultOptions = new()
-{
-    ClientInfo = new() { Name = "TestClient", Version = "1.0.0" }
+    Id = "TestServerSse",
+    Name = "TestServer",
+    TransportType = TransportTypes.Sse,
+    Location = "http://localhost:5021/sse",
 };
 
-await using var client = await McpClientFactory.CreateAsync(
-    serverConfig,
-    _defaultOptions,
-   null,
-    cancellationToken: default);
+var mcpClient = McpClientFactory.CreateAsync(mcpServerConfig, mcpClientOptions).GetAwaiter().GetResult();
+
+
+
+await foreach (var tool in mcpClient.ListToolsAsync())
+{
+    Console.WriteLine($"{tool.Name} ({tool.Description})");
+}
