@@ -14,11 +14,10 @@ McpServerConfig mcpServerConfig = new()
     Location = "http://localhost:5021/sse",
 };
 
-var mcpClient = McpClientFactory.CreateAsync(mcpServerConfig, mcpClientOptions).GetAwaiter().GetResult();
+await using var mcpClient = await McpClientFactory.CreateAsync(mcpServerConfig, mcpClientOptions);
 
 
-
-await foreach (var tool in mcpClient.ListToolsAsync())
+await foreach(  var message in mcpClient.EnumerateToolsAsync())
 {
-    Console.WriteLine($"{tool.Name} ({tool.Description})");
+    Console.WriteLine($"Tools: {message}");
 }
