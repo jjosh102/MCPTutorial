@@ -15,3 +15,13 @@ foreach (var tool in tools)
 {
     Console.WriteLine($"Connected to server with tools: {tool.Name}");
 }
+
+var result = await mcpClient.CallToolAsync(
+           "Echo",
+           new Dictionary<string, object?>
+           {
+               ["message"] = "Hello MCP!"
+           },
+           default);
+
+Console.WriteLine($"Result: {result.Content.First().Text}");
