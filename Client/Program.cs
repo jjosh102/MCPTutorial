@@ -33,12 +33,7 @@ await using var mcpHostClient = await McpClientFactory.CreateAsync(new()
     Id = "TestHostServer",
     Name = "TestHostServer",
     TransportType = TransportTypes.StdIo,
-    TransportOptions = new()
-    {
-        ["command"] = "npx",
-        ["arguments"] = "-y @modelcontextprotocol/server-everything",
-    }
-
+    Location = @"C:\repos\MCPTutorial\ServerWithHosting\bin\Debug\net9.0\ServerWithHosting.exe"
 });
 
 var tools = await mcpHostClient.ListToolsAsync();
@@ -46,3 +41,13 @@ foreach (var tool in tools)
 {
     Console.WriteLine($"Connected to server with tools: {tool.Name}");
 }
+
+var result = await mcpHostClient.CallToolAsync(
+           "Echo",
+           new Dictionary<string, object?>
+           {
+               ["message"] = "Hello MCP!"
+           },
+           default);
+
+Console.WriteLine($"Result: {result.Content.First().Text}");
