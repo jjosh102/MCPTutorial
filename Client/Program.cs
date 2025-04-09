@@ -28,21 +28,24 @@ using ModelContextProtocol.Protocol.Transport;
 
 
 
-await using var mcpHostClient = await McpClientFactory.CreateAsync(new()
+var (command, arguments) = GetCommandAndArguments(args);
+
+var clientTransport = new StdioClientTransport(new()
 {
-    Id = "TestHostServer",
-    Name = "TestHostServer",
-    TransportType = TransportTypes.StdIo,
-    Location = @"C:\repos\MCPTutorial\ServerWithHosting\bin\Debug\net9.0\ServerWithHosting.exe"
+    Name = "Demo Server",
+    Command = command,
+    Arguments = arguments,
 });
 
-var tools = await mcpHostClient.ListToolsAsync();
+await using var mcpClient = await McpClientFactory.CreateAsync(clientTransport);
+
+var tools = await mcpClient.ListToolsAsync();
 foreach (var tool in tools)
 {
     Console.WriteLine($"Connected to server with tools: {tool.Name}");
 }
 
-var result = await mcpHostClient.CallToolAsync(
+var result = await mcpClient.CallToolAsync(
            "GetAnimeListBySeasonAndYear",
            new Dictionary<string, object?>
            {
@@ -52,3 +55,14 @@ var result = await mcpHostClient.CallToolAsync(
            default);
 
 Console.WriteLine($"Result: {result.Content.First().Text}");
+
+static (string command, string[] arguments) GetCommandAndArguments(string[] args)
+{
+    return args switch
+    {
+        [var script] when script.EndsWith(".py") => ("python", args),
+        [var script] when script.EndsWith(".js") => ("node", args),
+        [var script] when Directory.Exists(script) || (File.Exists(script) && script.EndsWith(".csproj")) => ("dotnet", ["run", "--project", script, "--no-build"]),
+        _ => ("dotnet", ["run", "--project", "../ServerWithHosting", "--no-build"])
+    };
+}
