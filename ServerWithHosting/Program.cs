@@ -1,6 +1,7 @@
 ﻿﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Serilog;
 using ServerWithHosting.Services;
 using ServerWithHosting.Tools;
@@ -25,8 +26,12 @@ try
     .AddEnvironmentVariables();
 
     builder.Services.Configure<MyAnimeListOptions>(builder.Configuration.GetSection(nameof(MyAnimeListOptions)));
-    builder.Services.AddHttpClient();
-    builder.Services.AddSingleton<AnimeListService>();
+    builder.Services.AddHttpClient<AnimeListService>((serviceProvider, client) =>
+    {
+        client.BaseAddress = new Uri("https://api.myanimelist.net/");
+        var options = serviceProvider.GetRequiredService<IOptions<MyAnimeListOptions>>().Value;
+        client.DefaultRequestHeaders.Add("X-MAL-CLIENT-ID", options.ClientId);
+    });
     builder.Services.AddSerilog();
     builder.Services.AddMcpServer()
         .WithStdioServerTransport()
