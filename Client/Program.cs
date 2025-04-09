@@ -43,10 +43,11 @@ foreach (var tool in tools)
 }
 
 var result = await mcpHostClient.CallToolAsync(
-           "Echo",
+           "GetAnimeListBySeasonAndYear",
            new Dictionary<string, object?>
            {
-               ["message"] = "Hello MCP!"
+               ["season"] = "winter",
+               ["year"] = 2024
            },
            default);
 

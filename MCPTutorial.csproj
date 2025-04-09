@@ -4,7 +4,8 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-    </PropertyGroup>
+      <UserSecretsId>3f230714-a82e-4257-ada6-f501ffdbb215</UserSecretsId>
+  </PropertyGroup>
 
     <ItemGroup>
       <Folder Include="Client\" />

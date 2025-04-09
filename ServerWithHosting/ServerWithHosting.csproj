@@ -5,6 +5,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <UserSecretsId>580df832-8be4-4dfa-b868-b1e90f659f4b</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,7 +14,8 @@
     <PackageReference Include="Serilog.Sinks.Console" Version="6.0.1-dev-00953" />
     <PackageReference Include="Serilog.Sinks.Debug" Version="3.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="7.0.0-dev-02301" />
-       <PackageReference Include="ModelContextProtocol" Version="0.1.0-preview.6" />
+    <PackageReference Include="ModelContextProtocol" Version="0.1.0-preview.6" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.4" />
     <RuntimeHostConfigurationOption Include="Serilog.IsCompilerGeneratedCodeSupported" Value="false" Trim="true" />
   </ItemGroup>
 
