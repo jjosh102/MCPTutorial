@@ -3,8 +3,10 @@ using System.Text.Json;
 using ModelContextProtocol.Server;
 using ServerWithHosting.Services;
 
+namespace ServerWithHosting.Services;
+
 [McpServerToolType]
-public static class AnimeListTool
+public sealed class AnimeListTool
 {
     [McpServerTool, Description("Get a list of anime by season and year.")]
     public static async Task<string> GetAnimeListBySeasonAndYear(
