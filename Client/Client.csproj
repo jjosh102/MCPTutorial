@@ -5,6 +5,8 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <NoWarn>$(NoWarn);CA2249;CS0612;SKEXP0001;VSTHRD111;CA2007;SKEXP0070;SKEXP0010</NoWarn>
+      
     </PropertyGroup>
 
     <ItemGroup>
@@ -13,7 +15,11 @@
         <PackageReference Include="Microsoft.Extensions.AI.Ollama" Version="9.4.0-preview.1.25207.5" />
         <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.4" />
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.4" />
-
+        <PackageReference Include="Microsoft.SemanticKernel" Version="1.46.0" />
+        <PackageReference Include="Microsoft.SemanticKernel.Agents.Core" Version="1.46.0" />
+        <PackageReference Include="Microsoft.Extensions.AI" Version="9.4.0-preview.1.25207.5" />
+        <PackageReference Include="Microsoft.SemanticKernel.Connectors.Ollama"
+            Version="1.46.0-alpha" />
     </ItemGroup>
 
 </Project>
