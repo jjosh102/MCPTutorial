@@ -35,10 +35,12 @@ builder.Services.AddHttpClient<AnimeListService>((serviceProvider, client) =>
     var options = serviceProvider.GetRequiredService<IOptions<MyAnimeListOptions>>().Value;
     client.DefaultRequestHeaders.Add("X-MAL-CLIENT-ID", options.ClientId);
 });
+builder.Services.AddSingleton<TrendReader>();
 builder.Services
     .AddMcpServer()
     .WithStdioServerTransport()
     .WithTools<AnimeListTool>()
+    .WithTools<TrendDataTool>()
     .WithTools<AddTool>()
     .WithTools<AnnotatedMessageTool>()
     .WithTools<EchoTool>()
