@@ -39,17 +39,7 @@ builder.Services.AddSingleton<TrendReader>();
 builder.Services
     .AddMcpServer()
     .WithStdioServerTransport()
-    .WithTools<AnimeListTool>()
-    .WithTools<TrendDataTool>()
-    .WithTools<AddTool>()
-    .WithTools<AnnotatedMessageTool>()
-    .WithTools<EchoTool>()
-    .WithTools<LongRunningTool>()
-    .WithTools<PrintEnvTool>()
-    .WithTools<SampleLlmTool>()
-    .WithTools<TinyImageTool>()
-    .WithPrompts<ComplexPromptType>()
-    .WithPrompts<SimplePromptType>()
+    .WithToolsFromAssembly()
     .WithListResourceTemplatesHandler(async (ctx, ct) =>
     {
         return new ListResourceTemplatesResult
