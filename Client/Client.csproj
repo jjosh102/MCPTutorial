@@ -11,14 +11,14 @@
 
     <ItemGroup>
         <PackageReference Include="McpDotNet.Extensions.AI" Version="1.1.0.1" />
-        <PackageReference Include="ModelContextProtocol" Version="0.1.0-preview.9" />
+        <PackageReference Include="ModelContextProtocol" Version="0.1.0-preview.10" />
         <PackageReference Include="Microsoft.Extensions.AI.Ollama" Version="9.4.0-preview.1.25207.5" />
         <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.4" />
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.4" />
-        <PackageReference Include="Microsoft.SemanticKernel" Version="1.46.0" />
-        <PackageReference Include="Microsoft.SemanticKernel.Agents.Core" Version="1.46.0" />
+        <PackageReference Include="Microsoft.SemanticKernel" Version="1.47.0" />
+        <PackageReference Include="Microsoft.SemanticKernel.Agents.Core" Version="1.47.0" />
         <PackageReference Include="Microsoft.Extensions.AI" Version="9.4.0-preview.1.25207.5" />
-        <PackageReference Include="Microsoft.SemanticKernel.Connectors.Ollama" Version="1.46.0-alpha" />
+        <PackageReference Include="Microsoft.SemanticKernel.Connectors.Ollama" Version="1.47.0-alpha" />
     </ItemGroup>
 
 </Project>
