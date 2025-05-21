@@ -3,7 +3,7 @@
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Agents;
 using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol.Transport;
+using ModelContextProtocol.Protocol;
 
 
 

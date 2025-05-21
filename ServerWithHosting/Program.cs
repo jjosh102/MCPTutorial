@@ -5,10 +5,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using ModelContextProtocol;
-using ModelContextProtocol.Protocol.Types;
+using ModelContextProtocol.Protocol;
 using ModelContextProtocol.Server;
 using ServerWithHosting;
-using ServerWithHosting.Prompts;
 using ServerWithHosting.Services;
 using ServerWithHosting.Tools;
 
