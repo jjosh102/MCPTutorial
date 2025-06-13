@@ -4,7 +4,7 @@ using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Agents;
 using ModelContextProtocol.Client;
 using ModelContextProtocol.Protocol;
-
+    
 
 
 var (command, arguments) = GetCommandAndArguments(args);
