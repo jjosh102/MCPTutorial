@@ -92,38 +92,7 @@ builder.Services
             };
         }
     })
-    .WithSubscribeToResourcesHandler(async (ctx, ct) =>
-    {
-        var uri = ctx.Params?.Uri;
-
-        if (uri is not null)
-        {
-            subscriptions.Add(uri);
-
-            await ctx.Server.SampleAsync([
-                new ChatMessage(ChatRole.System, "You are a helpful test server"),
-                new ChatMessage(ChatRole.User, $"Resource {uri}, context: A new subscription was started"),
-            ],
-            options: new ChatOptions
-            {
-                MaxOutputTokens = 100,
-                Temperature = 0.7f,
-            },
-            cancellationToken: ct);
-        }
-
-        return new EmptyResult();
-    })
-    .WithUnsubscribeFromResourcesHandler(async (ctx, ct) =>
-    {
-        var uri = ctx.Params?.Uri;
-        if (uri is not null)
-        {
-            subscriptions.Remove(uri);
-        }
-        return new EmptyResult();
-    })
-    .WithCompleteHandler(async (ctx, ct) =>
+     .WithCompleteHandler(async (ctx, ct) =>
     {
         var exampleCompletions = new Dictionary<string, IEnumerable<string>>
         {
@@ -140,9 +109,9 @@ builder.Services
         var @ref = @params.Ref;
         var argument = @params.Argument;
 
-        if (@ref.Type == "ref/resource")
+        if (@ref is ResourceTemplateReference rtr)
         {
-            var resourceId = @ref.Uri?.Split("/").Last();
+            var resourceId = rtr.Uri?.Split("/").Last();
 
             if (resourceId is null)
             {
@@ -157,7 +126,7 @@ builder.Services
             };
         }
 
-        if (@ref.Type == "ref/prompt")
+        if (@ref is PromptReference pr)
         {
             if (!exampleCompletions.TryGetValue(argument.Name, out IEnumerable<string>? value))
             {
@@ -177,7 +146,7 @@ builder.Services
     {
         if (ctx.Params?.Level is null)
         {
-            throw new McpException("Missing required argument 'level'");
+            throw new McpException("Missing required argument 'level'", McpErrorCode.InvalidParams);
         }
 
         _minimumLoggingLevel = ctx.Params.Level;

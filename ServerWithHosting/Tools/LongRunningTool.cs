@@ -1,4 +1,4 @@
-﻿using ModelContextProtocol;
+﻿﻿using ModelContextProtocol;
 using ModelContextProtocol.Protocol;
 using ModelContextProtocol.Server;
 using System.ComponentModel;
@@ -15,7 +15,7 @@ public class LongRunningTool
         int duration = 10,
         int steps = 5)
     {
-        var progressToken = context.Params?.Meta?.ProgressToken;
+        var progressToken = context.Params?.ProgressToken;
         var stepDuration = duration / steps;
 
         for (int i = 1; i <= steps + 1; i++)
