@@ -1,7 +1,7 @@
 ﻿
 
-using Microsoft.SemanticKernel;
-using Microsoft.SemanticKernel.Agents;
+using Microsoft.Extensions.AI;
+using Microsoft.Extensions.Logging;
 using ModelContextProtocol.Client;
 
     
@@ -24,104 +24,46 @@ foreach (var tool in tools)
     Console.WriteLine($"Connected to server with tools: {tool.Name}");
 }
 
-// var result = await mcpClient.CallToolAsync(
-//            "GetAnimeListBySeasonAndYear",
-//            new Dictionary<string, object?>
-//            {
-//                ["season"] = "winter",
-//                ["year"] = 2024
-//            },
-//            default);
+var result = await mcpClient.CallToolAsync(
+           "GetAnimeListBySeasonAndYear",
+           new Dictionary<string, object?>
+           {
+               ["season"] = "winter",
+               ["year"] = 2024
+           },
+           default);
 
-// Console.WriteLine($"Result: {result.Content.First().Text}");
-
-
-// This model is not enough to give any coherent response
-// var ollamaChatClient = new OllamaChatClient(new Uri("http://localhost:11434"), "llama3.2:3b");
-
-// using var factory =
-//     LoggerFactory.Create(builder => builder.AddConsole().SetMinimumLevel(LogLevel.None));
-
-// var client = new ChatClientBuilder(ollamaChatClient)
-//     .UseLogging(factory)
-//     .UseFunctionInvocation()
-//     .Build();
+Console.WriteLine($"Result: {result.Content.First()}");
 
 
-// IList<ChatMessage> messages =
-// [
-//    new(ChatRole.System, """
-//                         You're an otaku who knows everything there is to know about anime.
-//                         """),
-//     new(ChatRole.User, "What are the best anime of the winter 2024 season?"),
-// ];
+var ollamaChatClient = new OllamaChatClient(new Uri("http://localhost:11434"), "qwen3:8b");
 
-// var response =
-//     await client.GetResponseAsync(
-//         messages,
-//         new ChatOptions
-//         {
-//             Tools = [.. tools]
-//         });
+using var factory =
+    LoggerFactory.Create(builder => builder.AddConsole().SetMinimumLevel(LogLevel.None));
 
-// Console.WriteLine(response);
+var client = new ChatClientBuilder(ollamaChatClient)
+    .UseLogging(factory)
+    .UseFunctionInvocation()
+    .Build();
 
-var builder = Kernel.CreateBuilder();
 
-//qwen3:8b is good for tool calling
-builder.AddOllamaChatCompletion("qwen3:8b", new Uri("http://localhost:11434"));
+IList<ChatMessage> messages =
+[
+   new(ChatRole.System, """
+                        You're an otaku who knows everything there is to know about anime.
+                        """),
+    new(ChatRole.User, "What are the best anime of the winter 2024 season?"),
+];
 
-var kernel = builder.Build();
-
-ChatCompletionAgent agent = new()
-{
-    Instructions =
-    """
-            You're an otaku who knows everything there is to know about anime.
-            Provie only the best recommendations for anime based on the user's query.
-            If you don't know the answer, say "I don't know" or "I don't have enough information to answer that".
-            """,
-    Name = "Anime Agent",
-    Kernel = kernel,
-
-    Arguments = new KernelArguments(new PromptExecutionSettings
-    { FunctionChoiceBehavior = FunctionChoiceBehavior.Auto() })
-};
-
-kernel.Plugins.AddFromFunctions("Demo", tools.Select(tools => tools.AsKernelFunction()));
-
-ChatHistoryAgentThread agentThread = new();
-Console.WriteLine("Anime recommendations for Winter 2024:\n");
-Console.WriteLine("User: What are the  anime of the winter 2024 season? Provide only the list in a nice format, no explanations or additional text.");
-Console.Write("Anime Agent: ");
-
-var thinkingIndicator = new[] { "|", "/", "-", "\\" };
-int indicatorIndex = 0;
-bool hasStarted = false;
-
-await foreach (StreamingChatMessageContent response in agent.InvokeStreamingAsync("What are the best anime of the winter 2024 season?", agentThread))
-{
-    if (!string.IsNullOrWhiteSpace(response.Content))
-    {
-        if (!hasStarted)
+var response =
+    await client.GetResponseAsync(
+        messages,
+        new ChatOptions
         {
-            
-            Console.Write("\rAnime Agent: ");
-            hasStarted = true;
-        }
-        Console.Write(response.Content);
-    }
-    else if (!hasStarted)
-    {
-    
-        Console.Write($"\rAnime Agent: {thinkingIndicator[indicatorIndex++ % thinkingIndicator.Length]}");
-        await Task.Delay(100);
-    }
-}
+            Tools = [.. tools]
+        });
 
-Console.WriteLine();
-
-Console.WriteLine("\n--- End of recommendations ---");
+Console.WriteLine(response);
 
 
 static (string command, string[] arguments) GetCommandAndArguments(string[] args)
