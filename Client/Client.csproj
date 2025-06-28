@@ -15,10 +15,10 @@
         <PackageReference Include="Microsoft.Extensions.AI.Ollama" Version="9.6.0-preview.1.25310.2" />
         <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.6" />
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.6" />
-        <PackageReference Include="Microsoft.SemanticKernel" Version="1.57.0" />
-        <PackageReference Include="Microsoft.SemanticKernel.Agents.Core" Version="1.57.0" />
+        <PackageReference Include="Microsoft.SemanticKernel" Version="1.58.0" />
+        <PackageReference Include="Microsoft.SemanticKernel.Agents.Core" Version="1.58.0" />
         <PackageReference Include="Microsoft.Extensions.AI" Version="9.6.0" />
-        <PackageReference Include="Microsoft.SemanticKernel.Connectors.Ollama" Version="1.57.0-alpha" />
+        <PackageReference Include="Microsoft.SemanticKernel.Connectors.Ollama" Version="1.58.0-alpha" />
     </ItemGroup>
 
 </Project>
