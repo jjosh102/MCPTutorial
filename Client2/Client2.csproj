@@ -11,7 +11,7 @@
 
     <ItemGroup>
         <PackageReference Include="McpDotNet.Extensions.AI" Version="1.1.0.1" />
-        <PackageReference Include="ModelContextProtocol" Version="0.3.0-preview.1" />
+        <PackageReference Include="ModelContextProtocol" Version="0.3.0-preview.2" />
         <PackageReference Include="Microsoft.Extensions.AI.Ollama" Version="9.6.0-preview.1.25310.2" />
         <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.6" />
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.6" />
