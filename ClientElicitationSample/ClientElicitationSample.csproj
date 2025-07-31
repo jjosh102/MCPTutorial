@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+   <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <NoWarn>$(NoWarn);CA2249;CS0612;SKEXP0001;VSTHRD111;CA2007;SKEXP0070;SKEXP0010</NoWarn>
+      
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="McpDotNet.Extensions.AI" Version="1.1.0.1" />
+        <PackageReference Include="ModelContextProtocol" Version="0.3.0-preview.3" />
+    </ItemGroup>
+
+</Project>
