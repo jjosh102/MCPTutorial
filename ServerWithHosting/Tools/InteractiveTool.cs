@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Text.Json;
+using ModelContextProtocol.Client;
 using ModelContextProtocol.Protocol;
 using ModelContextProtocol.Server;
 using ServerWithHosting.Services;
@@ -12,12 +13,12 @@ public sealed class InteractiveTool
 {
   [McpServerTool, Description("A simple game where the user has to guess a number between 1 and 10.")]
   public async Task<string> GuessTheNumber(
-  IMcpServer server,
+  McpClient server,
   CancellationToken token
 )
   {
 
-    if (server.ClientCapabilities?.Elicitation is null)
+    if (server.Elicitation is null)
     {
       return "Elicitation is not supported by the client.";
     }

@@ -32,7 +32,7 @@ McpClientOptions options = new()
         }
     }
 };
-await using var mcpClient = await McpClientFactory.CreateAsync(clientTransport, options);
+await using var mcpClient = await McpClient.CreateAsync(clientTransport, options);
 
 var tools = await mcpClient.ListToolsAsync();
 foreach (var tool in tools)
